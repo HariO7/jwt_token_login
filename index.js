@@ -4,6 +4,8 @@ const app = require('./app');
 const server = http.createServer(app);
 const User = require('./model/user');
 const jwt = require('jsonwebtoken');
+const { verify } = require('crypto');
+const verifyToken = require('./middleware/auth');
 
 
 const { API_PORT } = process.env;
@@ -69,7 +71,7 @@ app.get('/login',(req,res)=>{
     res.render('login.html');
 })
 
-app.post('/login', async(req, res) => {
+app.post('/login',verifyToken, async(req, res) => {
     try {
         const { Name, password } =req.body;
 
