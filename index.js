@@ -71,7 +71,7 @@ app.get('/login',(req,res)=>{
     res.render('login.html');
 })
 
-app.post('/login',verifyToken, async(req, res) => {
+app.post('/login', async(req, res) => {
     try {
         const { Name, password } =req.body;
 
